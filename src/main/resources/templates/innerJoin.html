@@ -32,53 +32,6 @@
 
 <div class="container">
     <div class="row py-2">
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/car/new}">Add Car</a>
-        </div>
-
-
-        <div class="col-12">
-            <form th:action="@{/car/sortMin}" th:method="post">
-            <input type="number" class="form-control" id="nameMin" name="number"
-                   placeholder="Enter bound min">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <a class="btn btn-primary" th:href="@{/car/sortMin}">min bound price</a>
-        </div>
-
-        <div class="col-12">
-            <form th:action="@{/car/sortMax}" th:method="post">
-                <input type="number" class="form-control" id="nameMax" name="number"
-                       placeholder="Enter bound max">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <a class="btn btn-primary" th:href="@{/car/sortMax}">max bound price</a>
-        </div>
-
-        <div class="col-12">
-            <form th:action="@{/car/sortEquals}" th:method="post">
-                <input type="number" class="form-control" id="equals" name="number"
-                       placeholder="Enter equals">
-                <button type="submit" class="btn btn-primary">Submit</button>
-            </form>
-            <a class="btn btn-primary" th:href="@{/car/sortEquals}">equals price</a>
-        </div>
-
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/car/between}">between</a>
-        </div>
-
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/car/sortDesc}">sort desc</a>
-        </div>
-
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/car/groupBy}">group by price from country</a>
-        </div>
-
-        <div class="col-12">
-            <a class="btn btn-primary" th:href="@{/car/innerJoin}">innerJoin</a>
-        </div>
 
         <div class="col-12">
             <table class="table table-bordered my-2">
@@ -90,25 +43,20 @@
                     <th scope="col">Price</th>
                     <th scope="col">Country creator</th>
                     <th scope="col">Year creator</th>
+                    <th scope="col">Continent</th>
                 </tr>
                 </thead>
                 <tbody>
-                <tr th:unless="${cars.isEmpty()}" th:each="car : ${cars}">
+                <tr th:unless="${carsCountry.isEmpty()}" th:each="car : ${carsCountry}">
                     <th scope="row" th:text="${car.id}">1</th>
                     <td th:text="${car.title}">bmw</td>
                     <td th:text="${car.model}">bmw</td>
                     <td scope="row" th:text="${car.price}">7</td>
                     <td th:text="${car.countryCreator}">rus</td>
                     <td scope="row" th:text="${car.yearCreator}">7</td>
-
-                    <td th:unless="${cars.isEmpty()}">
-                        <a class="btn btn-success" th:href="@{/car/{id}(id = ${car.id})}"><i class="fas fa-edit"></i></a>
-                        <form class="d-inline" th:action="@{/car/delete/{id}(id = ${car.id})}">
-                            <button class="btn btn-danger"><i class="far fa-trash-alt"></i></button>
-                        </form>
-                    </td>
+                    <td th:text="${car.continent}"></td>
                 </tr>
-                </tbody>
+
             </table>
         </div>
     </div>

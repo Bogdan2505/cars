@@ -1,7 +1,9 @@
 package com.cars.Service;
 
+import com.cars.CarDto.CarCountryDto;
 import com.cars.CarDto.CarDto;
 import com.cars.persist.Car;
+import com.cars.persist.CarCountry;
 import com.cars.persist.CarRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,7 +13,7 @@ import java.util.Optional;
 import java.util.stream.Collectors;
 
 @Service
-public class CarServiceImpl implements CarService{
+public class CarServiceImpl implements CarService {
 
     private final CarRepository carRepository;
 
@@ -27,8 +29,38 @@ public class CarServiceImpl implements CarService{
     }
 
     @Override
-    public List<CarDto> findAllMinPrice(int number) {
-        return carRepository.findAllMinPrice(number).stream()
+    public List<CarDto> findAllMinBoundPrice(int number) {
+        return carRepository.findAllMinBoundPrice(number).stream()
+                .map(CarServiceImpl::carToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDto> findAllMaxBoundPrice(int number) {
+        return carRepository.findAllMaxBoundPrice(number).stream()
+                .map(CarServiceImpl::carToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDto> findAllEqualsPrice(int number) {
+        return carRepository.findAllEqualsPrice(number).stream()
+                .map(CarServiceImpl::carToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDto> findAllBetween(int numberMin, int numberMax) {
+        return carRepository.findAllBetween(numberMin, numberMax).stream()
+                .map(CarServiceImpl::carToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDto> findAllSortDesc() {
+        return carRepository.findAllSortDesc().stream()
+                .map(CarServiceImpl::carToDto).collect(Collectors.toList());
+    }
+
+    @Override
+    public List<CarDto> findAllGroupBy() {
+        return carRepository.findAllGroupBy().stream()
                 .map(CarServiceImpl::carToDto).collect(Collectors.toList());
     }
 
@@ -47,7 +79,7 @@ public class CarServiceImpl implements CarService{
                         car.getModel(),
                         car.getPrice(),
                         car.getCountryCreator(),
-                        car.getYearCreator() )));
+                        car.getYearCreator(), car.getContinentId() )));
     }
 
     @Override
@@ -57,6 +89,8 @@ public class CarServiceImpl implements CarService{
 
 
     private static CarDto carToDto(Car car) {
-        return new CarDto(car.getId(), car.getTitle(), car.getModel(), car.getPrice(), car.getCountryCreator(), car.getYearCreator());
+        return new CarDto(car.getId(), car.getTitle(),
+                car.getModel(), car.getPrice(), car.getCountryCreator(),
+                car.getYearCreator(), car.getContinentId());
     }
 }

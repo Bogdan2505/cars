@@ -1,16 +1,10 @@
 package com.cars.persist;
 
-import com.fasterxml.jackson.annotation.JsonProperty;
-
 import javax.persistence.*;
-import java.util.List;
 
 @Entity
-@Table(name = "cars")
-       /* indexes = {
-                @Index(name = "ux_car", columnList = "country_id", unique = true)
-        })*/
-public class Car {
+@Table(name = "carsCountry")
+public class CarCountry {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -31,15 +25,19 @@ public class Car {
     @Column(nullable = false)
     private int yearCreator;
 
-    @Column(nullable = false)
     private int continentId;
 
+    private int crId;
 
-    public Car() {
+   // @Column(nullable = false)
+    private String continent;
+
+
+
+    public CarCountry() {
     }
 
-
-    public Car(Long id, String title, String model, int price, String countryCreator, int yearCreator, int continentId) {
+    public CarCountry(Long id, String title, String model, int price, String countryCreator, int yearCreator, int continentId, int crId, String continent) {
         this.id = id;
         this.title = title;
         this.model = model;
@@ -47,6 +45,8 @@ public class Car {
         this.countryCreator = countryCreator;
         this.yearCreator = yearCreator;
         this.continentId = continentId;
+        this.crId = crId;
+        this.continent = continent;
     }
 
     public Long getId() {
@@ -65,28 +65,20 @@ public class Car {
         this.title = title;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
-    public int getContinentId() {
-        return continentId;
-    }
-
-    public void setContinentId(int continentId) {
-        this.continentId = continentId;
-    }
-
     public String getModel() {
         return model;
     }
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getCountryCreator() {
@@ -103,5 +95,29 @@ public class Car {
 
     public void setYearCreator(int yearCreator) {
         this.yearCreator = yearCreator;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
+
+    public int getContinentId() {
+        return continentId;
+    }
+
+    public void setContinentId(int continentId) {
+        this.continentId = continentId;
+    }
+
+    public int getCrId() {
+        return crId;
+    }
+
+    public void setCrId(int crId) {
+        this.crId = crId;
     }
 }

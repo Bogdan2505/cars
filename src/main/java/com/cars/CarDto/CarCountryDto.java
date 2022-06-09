@@ -1,9 +1,8 @@
 package com.cars.CarDto;
 
-import javax.persistence.Column;
 import javax.validation.constraints.NotBlank;
 
-public class CarDto {
+public class CarCountryDto {
 
     private Long id;
 
@@ -20,13 +19,17 @@ public class CarDto {
 
     private int yearCreator;
 
-    int continentId;
+    private int continentId;
 
-    public CarDto() {
+    private int idCr;
+
+    //@NotBlank
+    private String continent;
+
+    public CarCountryDto() {
     }
 
-
-    public CarDto(Long id, String title, String model, int price, String countryCreator, int yearCreator, int continentId) {
+    public CarCountryDto(Long id, @NotBlank String title, @NotBlank String model, int price, @NotBlank String countryCreator, int yearCreator, int continentId, int idCr, String continent) {
         this.id = id;
         this.title = title;
         this.model = model;
@@ -34,21 +37,8 @@ public class CarDto {
         this.countryCreator = countryCreator;
         this.yearCreator = yearCreator;
         this.continentId = continentId;
-
-    }
-
-
-    public CarDto(String title, int price) {
-        this.title = title;
-        this.price = price;
-    }
-
-    public int getContinentId() {
-        return continentId;
-    }
-
-    public void setContinentId(int continentId) {
-        this.continentId = continentId;
+        this.idCr = idCr;
+        this.continent = continent;
     }
 
     public Long getId() {
@@ -67,20 +57,20 @@ public class CarDto {
         this.title = title;
     }
 
-    public int getPrice() {
-        return price;
-    }
-
-    public void setPrice(int price) {
-        this.price = price;
-    }
-
     public String getModel() {
         return model;
     }
 
     public void setModel(String model) {
         this.model = model;
+    }
+
+    public int getPrice() {
+        return price;
+    }
+
+    public void setPrice(int price) {
+        this.price = price;
     }
 
     public String getCountryCreator() {
@@ -97,5 +87,29 @@ public class CarDto {
 
     public void setYearCreator(int yearCreator) {
         this.yearCreator = yearCreator;
+    }
+
+    public String getContinent() {
+        return continent;
+    }
+
+    public void setContinent(String continent) {
+        this.continent = continent;
+    }
+
+    public int getContinentId() {
+        return continentId;
+    }
+
+    public void setContinentId(int continentId) {
+        this.continentId = continentId;
+    }
+
+    public int getIdCr() {
+        return idCr;
+    }
+
+    public void setIdCr(int idCr) {
+        this.idCr = idCr;
     }
 }
